@@ -9,32 +9,42 @@
 
 #import <UIKit/UIKit.h>
 
-#import <React/RCTView.h>
-#import <React/UIView+React.h>
+#import "RCTView.h"
+#import "UIView+React.h"
 
-#import "RCTTextInput.h"
+@class RCTEventDispatcher;
 
-@class RCTBridge;
+@interface RCTTextView : RCTView <UITextViewDelegate>
 
-@interface RCTTextView : RCTTextInput <UITextViewDelegate>
-
-@property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
-@property (nonatomic, assign) UITextSpellCheckingType spellCheckingType;
+@property (nonatomic, assign) BOOL autoCorrect;
 @property (nonatomic, assign) BOOL blurOnSubmit;
 @property (nonatomic, assign) BOOL clearTextOnFocus;
 @property (nonatomic, assign) BOOL selectTextOnFocus;
+@property (nonatomic, assign) UIEdgeInsets contentInset;
 @property (nonatomic, assign) BOOL automaticallyAdjustContentInsets;
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, strong) UIColor *placeholderTextColor;
-@property (nonatomic, copy) NSString *placeholder;
 @property (nonatomic, strong) UIFont *font;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, assign) CGFloat lineHeight;
+@property (nonatomic, strong) NSNumber *letterSpacing;
+@property (nonatomic, assign) NSWritingDirection writingDirection;
+@property (nonatomic, assign) NSTextAlignment textAlign;
+@property (nonatomic, assign) CGSize textShadowOffset;
+@property (nonatomic, assign) CGFloat textShadowRadius;
+@property (nonatomic, strong) UIColor *textShadowColor;
+@property (nonatomic, strong) NSDictionary *dropShadow;
+@property (nonatomic, copy) NSString *placeholder;
+@property (nonatomic, strong) UIColor *placeholderTextColor;
 @property (nonatomic, assign) NSInteger mostRecentEventCount;
 @property (nonatomic, strong) NSNumber *maxLength;
+@property (nonatomic, strong) NSNumber *maxLineCount;
 
 @property (nonatomic, copy) RCTDirectEventBlock onChange;
+@property (nonatomic, copy) RCTDirectEventBlock onContentSizeChange;
 @property (nonatomic, copy) RCTDirectEventBlock onSelectionChange;
 @property (nonatomic, copy) RCTDirectEventBlock onTextInput;
-@property (nonatomic, copy) RCTDirectEventBlock onScroll;
+
+- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
 
 - (void)performTextUpdate;
 
